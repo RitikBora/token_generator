@@ -1,14 +1,15 @@
 import { Coins, Droplet } from "lucide-react"
 import { Button } from "./ui/button"
-import { Switch } from "./ui/switch"
-import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
+import { ActiveTabAtom } from "@/recoil/Atoms";
+import { useRecoilState } from "recoil";
+import {motion} from 'framer-motion'
 
 
 export const TokenGenerator = ({ handleAction} : {handleAction: () => void}) =>
 {
    
-    const [activeTab , setActiveTab] = useState("token");
+    const [activeTab , setActiveTab] = useRecoilState(ActiveTabAtom);
 
     return(
         <section id="generator-section" className="container mx-auto px-4 py-20">
@@ -23,20 +24,29 @@ export const TokenGenerator = ({ handleAction} : {handleAction: () => void}) =>
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="token" className="mt-8">
-                <div className="text-center">
+                <motion.div className="text-center"
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    transition={{duration: 1 , ease:"easeOut"}}
+                >
+
                     <Coins className="h-16 w-16 mx-auto mb-4 text-blue-400" />
                     <h2 className="text-2xl font-bold mb-4 text-blue-300">Token Generator</h2>
                     <p className="mb-4 text-blue-200">Create your custom Web3 token here.</p>
                     <Button onClick={handleAction} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">Generate Token</Button>
-                </div>
+                </motion.div>
                 </TabsContent>
                 <TabsContent value="airdrop" className="mt-8">
-                <div className="text-center">
+                <motion.div className="text-center"
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    transition={{duration: 1 , ease:"easeOut"}}
+                >
                     <Droplet className="h-16 w-16 mx-auto mb-4 text-blue-400" />
                     <h2 className="text-2xl font-bold mb-4 text-blue-300">SOL Airdrop Faucet</h2>
                     <p className="mb-4 text-blue-200">Receive SOL tokens for testing and development.</p>
                     <Button onClick={handleAction} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">Request SOL</Button>
-                </div>
+                </motion.div>
                 </TabsContent>
             </Tabs>
             </div>

@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Hero } from "./Hero"
 import { TokenGenerator } from "./TokenGenerator"
+import { useSetRecoilState } from "recoil"
+import { ActiveTabAtom } from "@/recoil/Atoms"
 
 export const HomePage = () =>
 {
@@ -8,8 +10,10 @@ export const HomePage = () =>
     const [isWalletConnected, setIsWalletConnected] = useState(false)
     const [publicKey, setPublicKey] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const setActiveTab = useSetRecoilState(ActiveTabAtom);
 
-    const scrollToGenerator = () => {
+    const scrollToGenerator = (activeTab : string) => {
+        setActiveTab(activeTab);
         const element = document.getElementById('generator-section')
         element?.scrollIntoView({ behavior: "smooth"})
     }
