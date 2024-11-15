@@ -8,7 +8,7 @@ export const Hero = ({scrollToGenerator}: {scrollToGenerator :   (activeTab : st
 
     return(
         <section className="container mx-auto px-4 py-20 text-center max-w-4xl">
-          <div className="w-max-xl mx-auto ">
+          <div className="">
             <HoverImages/>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">

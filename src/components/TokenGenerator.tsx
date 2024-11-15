@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import {motion} from 'framer-motion'
 
 
-export const TokenGenerator = ({ handleAction} : {handleAction: () => void}) =>
+export const TokenGenerator = () =>
 {
    
     const [activeTab , setActiveTab] = useRecoilState(ActiveTabAtom);
@@ -33,7 +33,7 @@ export const TokenGenerator = ({ handleAction} : {handleAction: () => void}) =>
                     <Coins className="h-16 w-16 mx-auto mb-4 text-blue-400" />
                     <h2 className="text-2xl font-bold mb-4 text-blue-300">Token Generator</h2>
                     <p className="mb-4 text-blue-200">Create your custom Web3 token here.</p>
-                    <Button onClick={handleAction} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">Generate Token</Button>
+                    <Button onClick={() => {}} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">Generate Token</Button>
                 </motion.div>
                 </TabsContent>
                 <TabsContent value="airdrop" className="mt-8">
@@ -45,7 +45,7 @@ export const TokenGenerator = ({ handleAction} : {handleAction: () => void}) =>
                     <Droplet className="h-16 w-16 mx-auto mb-4 text-blue-400" />
                     <h2 className="text-2xl font-bold mb-4 text-blue-300">SOL Airdrop Faucet</h2>
                     <p className="mb-4 text-blue-200">Receive SOL tokens for testing and development.</p>
-                    <Button onClick={handleAction} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">Request SOL</Button>
+                    <Button onClick={() => {}} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">Request SOL</Button>
                 </motion.div>
                 </TabsContent>
             </Tabs>
