@@ -6,6 +6,7 @@ import { ActiveTabAtom, IsConnectionRequiredAtom, IsModalOpenAtom } from "@/reco
 import { ConnectWalletDialog } from "./ConnectWalletDialog"
 import { PublicKey } from '@solana/web3.js';
 import { showErrorMessage } from "@/utils/toastMessages"
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 
 
 export const HomePage = () =>
@@ -19,7 +20,7 @@ export const HomePage = () =>
     const setActiveTab = useSetRecoilState(ActiveTabAtom);
 
     const scrollToGenerator = (activeTab : string) => {
-        if(isConnectionRequired)
+        if(isConnectionRequired && activeTab === 'token')
         {
             setIsModalOpen(true);
         }
@@ -51,7 +52,6 @@ export const HomePage = () =>
                 <Hero scrollToGenerator={scrollToGenerator}/>
                 <TokenGenerator/>
             </div>
-            {isModalOpen && <ConnectWalletDialog isModalOpen setIsModalOpen={setIsModalOpen} handleFormSubmit={handleFormSubmit}/> }
         </div>
     )
 }

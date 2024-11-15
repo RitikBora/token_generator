@@ -4,13 +4,26 @@ import { RecoilRoot } from 'recoil';
 import './index.css'
 import App from './App.tsx'
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
+import {
+    WalletModalProvider,
+    WalletDisconnectButton,
+    WalletMultiButton
+} from '@solana/wallet-adapter-react-ui';
+import '@solana/wallet-adapter-react-ui/styles.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <RecoilRoot>
-      <App />
-      <ToastContainer/>
+      <ConnectionProvider endpoint={"https://api.devnet.solana.com"}>
+        <WalletProvider wallets={[]} autoConnect>
+            <WalletModalProvider>
+              <App />
+            </WalletModalProvider>
+        </WalletProvider>
+      </ConnectionProvider>
     </RecoilRoot>
   </StrictMode>,
 )
+
+

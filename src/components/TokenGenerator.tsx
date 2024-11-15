@@ -1,4 +1,4 @@
-import { Coins, DollarSign, Droplet, ImageIcon } from "lucide-react"
+import { Coins, DollarSign, Droplet, ImageIcon, Wallet } from "lucide-react"
 import { Button } from "./ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { ActiveTabAtom, IsConnectionRequiredAtom, IsModalOpenAtom } from "@/recoil/Atoms";
@@ -7,6 +7,7 @@ import {motion} from 'framer-motion'
 import { Input } from "./ui/input";
 import { useState } from "react";
 import { Label } from "@radix-ui/react-label";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 
 
@@ -49,6 +50,7 @@ const TokenGenarationForm = () =>
     const [tokenSymbol, setTokenSymbol] = useState('')
     const [tokenImageUrl, setTokenImageUrl] = useState('')
     const [tokenInitialSupply, setTokenInitialSupply] = useState('')
+     const [isHovered, setIsHovered] = useState(false);
 
     return(
         <motion.div className="text-center"
@@ -60,9 +62,22 @@ const TokenGenarationForm = () =>
             <h2 className="text-2xl font-bold mb-4 text-blue-300">Create Your Token</h2>
             <p className="mb-4 text-blue-200">Easily generate your custom Web3 token in just a few clicks.</p>
             {
-               isConnectionRequired ? <Button onClick={() => { setIsModalOpen(true) }} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">
-                    Start Token Creation
-                </Button>  :
+               isConnectionRequired ? <div className="space-y-4">
+                      <p className="text-blue-200">To get started, please connect your wallet.</p>
+                      <div 
+                         onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                      >
+                      <WalletMultiButton style={{
+                        backgroundColor: isHovered ? '#1d4ed8' : '#2563eb', 
+                        color: 'white',
+                        fontWeight: '600',
+                        transition: 'background-color 0.1s',
+                        padding: '0px 40px' 
+                      }}
+                     />
+                      </div>
+                    </div>  :
                  <form onSubmit={() => {}} className="space-y-6 max-w-md mx-auto">
                     <div className="space-y-2">
                       <Label htmlFor="tokenName" className="text-left block text-blue-300">Token Name</Label>
