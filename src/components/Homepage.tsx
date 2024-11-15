@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Hero } from "./Hero"
 import { TokenGenerator } from "./TokenGenerator"
-import { useSetRecoilState } from "recoil"
-import { ActiveTabAtom } from "@/recoil/Atoms"
+import { useRecoilState, useSetRecoilState } from "recoil"
+import { ActiveTabAtom, isConnectionRequiredAtom } from "@/recoil/Atoms"
 import { ConnectWalletDialog } from "./ConnectWalletDialog"
 import { PublicKey } from '@solana/web3.js';
 import { showErrorMessage } from "@/utils/toastMessages"
@@ -11,8 +11,8 @@ import { showErrorMessage } from "@/utils/toastMessages"
 export const HomePage = () =>
 {
     
-    const [isWalletConnected, setIsWalletConnected] = useState(false)
-    const [isConnectionRequired , setIsConnectionRequired] = useState(false);
+    const [isWalletConnected, setIsWalletConnected] = useState(false);
+    const [isConnectionRequired , setIsConnectionRequired] = useRecoilState(isConnectionRequiredAtom)
     // const [publicKey, setPublicKey] = useState('')
 
     const setActiveTab = useSetRecoilState(ActiveTabAtom);

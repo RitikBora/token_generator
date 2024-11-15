@@ -5,4 +5,8 @@ const ActiveTabAtom = atom({
     default: "token"
 })
 
-export {ActiveTabAtom};
+const isConnectionRequiredAtom = atom({
+    key: "IsConnectionRequiredAtom",
+    default: false
+})
+export {ActiveTabAtom , isConnectionRequiredAtom};
