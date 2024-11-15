@@ -4,12 +4,12 @@ import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { SetStateAction, useState } from "react"
 
-export const ConnectWalletDialog = ({ isConnectionRequired, setIsConnectionRequired, handleFormSubmit }: { isConnectionRequired: boolean, setIsConnectionRequired: React.Dispatch<SetStateAction<boolean>>, handleFormSubmit: (solanaAddress: string) => void }) => {
+export const ConnectWalletDialog = ({ isModalOpen, setIsModalOpen, handleFormSubmit }: { isModalOpen: boolean, setIsModalOpen: React.Dispatch<SetStateAction<boolean>>, handleFormSubmit: (solanaAddress: string) => void }) => {
   const [solanaAddress, setSolanaAddress] = useState('')
   const [isWalletConnected, setIsWalletConnected] = useState(false)
 
   return (
-    <Dialog open={isConnectionRequired} onOpenChange={setIsConnectionRequired}>
+    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogContent className="bg-blue-950 border border-blue-800 text-blue-100 sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-blue-300">Wallet Connection</DialogTitle>

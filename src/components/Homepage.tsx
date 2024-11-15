@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Hero } from "./Hero"
 import { TokenGenerator } from "./TokenGenerator"
 import { useRecoilState, useSetRecoilState } from "recoil"
-import { ActiveTabAtom, isConnectionRequiredAtom } from "@/recoil/Atoms"
+import { ActiveTabAtom, IsConnectionRequiredAtom, IsModalOpenAtom } from "@/recoil/Atoms"
 import { ConnectWalletDialog } from "./ConnectWalletDialog"
 import { PublicKey } from '@solana/web3.js';
 import { showErrorMessage } from "@/utils/toastMessages"
@@ -12,15 +12,16 @@ export const HomePage = () =>
 {
     
     const [isWalletConnected, setIsWalletConnected] = useState(false);
-    const [isConnectionRequired , setIsConnectionRequired] = useRecoilState(isConnectionRequiredAtom)
+    const [isConnectionRequired , setIsConnectionRequired] = useRecoilState(IsConnectionRequiredAtom)
+    const [isModalOpen , setIsModalOpen] = useRecoilState(IsModalOpenAtom);
     // const [publicKey, setPublicKey] = useState('')
 
     const setActiveTab = useSetRecoilState(ActiveTabAtom);
 
     const scrollToGenerator = (activeTab : string) => {
-        if(!isWalletConnected )
+        if(isConnectionRequired)
         {
-            setIsConnectionRequired(true);
+            setIsModalOpen(true);
         }
         setActiveTab(activeTab);
         const element = document.getElementById('generator-section')
@@ -30,12 +31,13 @@ export const HomePage = () =>
 
 
     const handleFormSubmit= (solanaAddress : string) => {
-        setIsConnectionRequired(false);
+        setIsModalOpen(false);
         if (solanaAddress.trim() !== '') {
             
             try
             {
                 const publicKey = new PublicKey(solanaAddress);
+                setIsConnectionRequired(false);
             }catch(err)
             {
                 showErrorMessage("Invalid Solana Address!")
@@ -49,7 +51,7 @@ export const HomePage = () =>
                 <Hero scrollToGenerator={scrollToGenerator}/>
                 <TokenGenerator/>
             </div>
-            {isConnectionRequired && <ConnectWalletDialog isConnectionRequired setIsConnectionRequired={setIsConnectionRequired} handleFormSubmit={handleFormSubmit}/> }
+            {isModalOpen && <ConnectWalletDialog isModalOpen setIsModalOpen={setIsModalOpen} handleFormSubmit={handleFormSubmit}/> }
         </div>
     )
 }

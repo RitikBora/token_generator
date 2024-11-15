@@ -5,8 +5,13 @@ const ActiveTabAtom = atom({
     default: "token"
 })
 
-const isConnectionRequiredAtom = atom({
+const IsConnectionRequiredAtom = atom({
     key: "IsConnectionRequiredAtom",
+    default: true
+})
+
+const IsModalOpenAtom = atom({
+    key: "IsModalOpenAtom",
     default: false
 })
-export {ActiveTabAtom , isConnectionRequiredAtom};
+export {ActiveTabAtom , IsConnectionRequiredAtom , IsModalOpenAtom};
