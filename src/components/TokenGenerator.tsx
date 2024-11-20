@@ -1,13 +1,14 @@
 import { Coins, DollarSign, Droplet, ImageIcon, Wallet } from "lucide-react"
 import { Button } from "./ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { ActiveTabAtom, IsConnectionRequiredAtom, IsModalOpenAtom } from "@/recoil/Atoms";
+import { ActiveTabAtom, IsConnectionRequiredAtom} from "@/recoil/Atoms";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {motion} from 'framer-motion'
 import { Input } from "./ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "@radix-ui/react-label";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWalletModal, WalletDisconnectButton, WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 
 
@@ -43,14 +44,24 @@ export const TokenGenerator = () =>
 
 const TokenGenarationForm = () =>
 {
-    const isConnectionRequired = useRecoilValue(IsConnectionRequiredAtom);
-    const  setIsModalOpen = useSetRecoilState(IsModalOpenAtom)
+     const { connection } = useConnection();
+    const wallet = useWallet();
+
+    useEffect(() =>
+    {
+      setIsConnectionRequired(!wallet.connected);
+    } , [wallet])
+
+
+    const [isConnectionRequired , setIsConnectionRequired] = useState(true);
+    
     
     const [tokenName, setTokenName] = useState('')
     const [tokenSymbol, setTokenSymbol] = useState('')
     const [tokenImageUrl, setTokenImageUrl] = useState('')
     const [tokenInitialSupply, setTokenInitialSupply] = useState('')
-     const [isHovered, setIsHovered] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isHovered2 , setIsHovered2] = useState(false);
 
     return(
         <motion.div className="text-center"
@@ -59,13 +70,12 @@ const TokenGenarationForm = () =>
             transition={{ duration: 1, ease: "easeOut" }}
         >
             <Coins className="h-16 w-16 mx-auto mb-4 text-blue-400" />
-            <h2 className="text-2xl font-bold mb-4 text-blue-300">Create Your Token</h2>
-            <p className="mb-4 text-blue-200">Easily generate your custom Web3 token in just a few clicks.</p>
-            {
+            <h2 className="text-2xl font-bold mb-4 text-blue-300">Launch Your Crypto Coin</h2>
+   {
                isConnectionRequired ? <div className="space-y-4">
-                      <p className="text-blue-200">To get started, please connect your wallet.</p>
+                     <p className="mb-4 text-blue-200">Effortlessly generate and customize your very own crypto coin with our intuitive platform. Simply connect your wallet and take your first step into the world of decentralized finance!</p>
                       <div 
-                         onMouseEnter={() => setIsHovered(true)}
+                        onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                       >
                       <WalletMultiButton style={{
@@ -142,6 +152,20 @@ const TokenGenarationForm = () =>
                     <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                       Create Token
                     </Button>
+                    <div
+                      onMouseEnter={() => setIsHovered(true)}
+                      onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <WalletMultiButton style={{
+                        backgroundColor: isHovered ? '#1d4ed8' : '#2563eb', 
+                        color: 'white',
+                        fontWeight: '600',
+                        transition: 'background-color 0.1s',
+                        padding: '0px 40px', 
+                      }}
+                     />
+                    </div>
+                    
                   </form>
             }
         </motion.div>
@@ -150,7 +174,7 @@ const TokenGenarationForm = () =>
 
 const SolFaucetForm = () =>
 {
-    const  setIsModalOpen = useSetRecoilState(IsModalOpenAtom);
+    
     return(
         <motion.div className="text-center"
             initial={{ opacity: 0 }}
@@ -160,7 +184,7 @@ const SolFaucetForm = () =>
             <Droplet className="h-16 w-16 mx-auto mb-4 text-blue-400" />
             <h2 className="text-2xl font-bold mb-4 text-blue-300">SOL Testnet Faucet</h2>
             <p className="mb-4 text-blue-200">Get free SOL tokens for your testing and development needs.</p>
-            <Button onClick={() => { setIsModalOpen(true) }} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+            <Button onClick={() => {}} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                 Claim Free SOL
             </Button>
         </motion.div>

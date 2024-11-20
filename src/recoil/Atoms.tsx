@@ -10,8 +10,5 @@ const IsConnectionRequiredAtom = atom({
     default: true
 })
 
-const IsModalOpenAtom = atom({
-    key: "IsModalOpenAtom",
-    default: false
-})
-export {ActiveTabAtom , IsConnectionRequiredAtom , IsModalOpenAtom};
+
+export {ActiveTabAtom , IsConnectionRequiredAtom};
