@@ -1,4 +1,4 @@
-import { Connection, Keypair, SystemProgram, Transaction } from "@solana/web3.js";
+import { Connection, Keypair, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import axios from 'axios';
 import { createAssociatedTokenAccountInstruction, createInitializeMetadataPointerInstruction, createInitializeMintInstruction, createMintToInstruction, ExtensionType, getAssociatedTokenAddressSync,
 
@@ -7,14 +7,13 @@ import { createAssociatedTokenAccountInstruction, createInitializeMetadataPointe
   TOKEN_2022_PROGRAM_ID, 
  TYPE_SIZE,  } from "@solana/spl-token";
  import { createInitializeInstruction, pack } from "@solana/spl-token-metadata";
-import { useWallet } from "@solana/wallet-adapter-react";
 
 
 
-export const createToken = async({ tokenName , tokenSymbol , tokenImageUrl , tokenInitialSupply } : { tokenName : string , tokenSymbol : string , tokenImageUrl : string , tokenInitialSupply: string}) =>
+export const createToken = async({ tokenName , tokenSymbol , tokenImageUrl , tokenInitialSupply ,publicKey , sendTransaction , signTransaction } : { tokenName : string , tokenSymbol : string , tokenImageUrl : string , tokenInitialSupply: string , publicKey : PublicKey | null , sendTransaction : any , signTransaction: any}) =>
     {
         const connection = new Connection("https://api.devnet.solana.com");
-        const {publicKey , signTransaction , sendTransaction} = useWallet();
+       
 
         if(!publicKey || !signTransaction)
         {
