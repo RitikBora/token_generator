@@ -15,11 +15,14 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-switch": "^1.1.1",
     "@radix-ui/react-tabs": "^1.1.1",
+    "@solana/spl-token": "^0.4.9",
+    "@solana/spl-token-metadata": "^0.1.6",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
     "@solana/web3.js": "^1.95.4",
     "@types/node": "^22.9.0",
     "autoprefixer": "^10.4.20",
+    "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.13",
@@ -31,7 +34,8 @@
     "recoil": "^0.7.7",
     "tailwind-merge": "^2.5.4",
     "tailwindcss": "^3.4.14",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vite-plugin-node-polyfills": "^0.22.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

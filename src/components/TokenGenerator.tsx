@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Label } from "@radix-ui/react-label";
 import {  WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import {useWallet } from "@solana/wallet-adapter-react";
+import { createToken } from "@/utils/tokenUtils";
 
 
 
@@ -45,6 +46,7 @@ export const TokenGenerator = () =>
 const TokenGenarationForm = () =>
 {
     const wallet = useWallet();
+   
 
     useEffect(() =>
     {
@@ -87,7 +89,7 @@ const TokenGenarationForm = () =>
                      />
                       </div>
                     </div>  :
-                 <form onSubmit={() => {}} className="space-y-6 max-w-md mx-auto">
+                 <form className="space-y-6 max-w-md mx-auto">
                     <div className="space-y-2">
                       <Label htmlFor="tokenName" className="text-left block text-blue-300">Token Name</Label>
                       <div className="relative">
@@ -148,7 +150,7 @@ const TokenGenarationForm = () =>
                         />
                       </div>
                     </div>
-                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                    <Button onClick={() => {createToken({tokenName , tokenSymbol , tokenImageUrl , tokenInitialSupply})}} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                       Create Token
                     </Button>
                     <div
