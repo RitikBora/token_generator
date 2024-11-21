@@ -21,4 +21,15 @@ const TokenGenerationStatusAtom = atom<"idle" | "loading" | "success" | "error">
 })
 
 
-export {ActiveTabAtom , IsConnectionRequiredAtom , IsGeneratingTokenAtom , TokenGenerationStatusAtom};
+const IsRequestingAirdropAtom = atom({
+    key: "IsRequestingAirdropAtom",
+    default: false
+})
+
+const AirdropStatusAtom = atom<"idle" | "loading" | "success" | "error">({
+    key: "AirdropStatusAtom",
+    default: "idle"
+})
+
+
+export {ActiveTabAtom , IsConnectionRequiredAtom , IsGeneratingTokenAtom , TokenGenerationStatusAtom , IsRequestingAirdropAtom , AirdropStatusAtom};

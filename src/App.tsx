@@ -1,5 +1,6 @@
 
 import './App.css'
+import { FaucetStatusDialog } from './components/FaucetStatusDialog'
 import { HomePage } from './components/Homepage'
 import { NavBar } from './components/Navbar'
 import { TokenStatusDialog } from './components/TokenStatusDialog'
@@ -13,6 +14,7 @@ function App() {
       <NavBar/>
       <HomePage/>
       <TokenStatusDialog/>
+      <FaucetStatusDialog/>
     </div>
   )
 }

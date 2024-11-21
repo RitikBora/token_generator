@@ -4,11 +4,26 @@ import { Coins, Droplet, Wallet } from "lucide-react";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useSetRecoilState } from "recoil";
+import { AirdropStatusAtom, IsRequestingAirdropAtom } from "@/recoil/Atoms";
 
 export const SolFaucetForm = () =>
 {
     const [solanaAddress , setSolanaAddress] = useState(""); 
     const [solAmount , setSolAmount] = useState("");
+
+    const setIsRequestingAirdrop = useSetRecoilState(IsRequestingAirdropAtom);
+    const setAirdropStatus = useSetRecoilState(AirdropStatusAtom);
+
+    const onFormSubmit = () =>
+    {
+      setIsRequestingAirdrop(true);
+      setAirdropStatus('loading');
+      setTimeout(() =>
+      {
+        setAirdropStatus("error");
+      } , 3000)
+    }
 
     return(
         <motion.div className="text-center"
@@ -19,7 +34,9 @@ export const SolFaucetForm = () =>
             <Droplet className="h-16 w-16 mx-auto mb-4 text-blue-400" />
             <h2 className="text-2xl font-bold mb-4 text-blue-300">SOL Testnet Faucet</h2>
             <p className="mb-4 text-blue-200">Get free SOL tokens for your testing and development needs.</p>
-             <form onSubmit={() => {}} className="space-y-6 max-w-md mx-auto">
+             <form onSubmit={(event) => {
+              event.preventDefault();
+             }} className="space-y-6 max-w-md mx-auto">
                  <div className="space-y-2">
                   <Label htmlFor="solanaAddress" className="text-left block text-blue-300">Solana Address</Label>
                   <div className="relative">
@@ -52,7 +69,7 @@ export const SolFaucetForm = () =>
                     />
                   </div>
                 </div>
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                <Button onClick={onFormSubmit} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                   Request SOL
                 </Button>
              </form>
