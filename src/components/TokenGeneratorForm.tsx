@@ -7,6 +7,10 @@ import { Label } from "@radix-ui/react-label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { createToken } from "@/utils/tokenUtils";
+import { useSetRecoilState } from "recoil";
+import { IsGeneratingTokenAtom, TokenGenerationStatusAtom } from "@/recoil/Atoms";
+import { TokenStatusDialog } from "./TokenStatusDialog";
+import { Dialog } from "@radix-ui/react-dialog";
 
 
 
@@ -14,6 +18,7 @@ import { createToken } from "@/utils/tokenUtils";
 export const TokenGenarationForm = () =>
 {
     const wallet = useWallet();
+    // @ts-ignore
     const {publicKey , signTransaction , sendTransaction} = wallet;
    
 
@@ -32,6 +37,25 @@ export const TokenGenarationForm = () =>
     const [tokenInitialSupply, setTokenInitialSupply] = useState('')
     const [isHovered, setIsHovered] = useState(false);
 
+  const  setIsGeneratingToken = useSetRecoilState(IsGeneratingTokenAtom);
+  const  setTokenGenerationStatus = useSetRecoilState(TokenGenerationStatusAtom);
+
+
+    const onFormSubmit = async () =>
+    {
+      setIsGeneratingToken(true);
+      setTokenGenerationStatus("loading");
+      
+      const {success} = await createToken({tokenName , tokenSymbol , tokenImageUrl , tokenInitialSupply , publicKey , sendTransaction , signTransaction});
+
+      if(success)
+      {
+        setTokenGenerationStatus("success");
+      }else
+      {
+        setTokenGenerationStatus("error");
+      }
+    }
 
     return(
         <motion.div className="text-center"
@@ -58,7 +82,8 @@ export const TokenGenarationForm = () =>
                      />
                       </div>
                     </div>  :
-                 <form onSubmit={(event) =>
+                    <div>
+                       <form onSubmit={(event) =>
                  {
                   event.preventDefault();
                   
@@ -123,7 +148,7 @@ export const TokenGenarationForm = () =>
                         />
                       </div>
                     </div>
-                    <Button type="submit" onClick={() => createToken({tokenName , tokenSymbol , tokenImageUrl , tokenInitialSupply , publicKey , sendTransaction , signTransaction})} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                    <Button type="submit" onClick={onFormSubmit} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                       Create Token
                     </Button>
                     <div
@@ -140,7 +165,11 @@ export const TokenGenarationForm = () =>
                      />
                     </div>
                     
+                    
                   </form>
+                    
+                    </div>
+                  
             }
         </motion.div>
     )

@@ -1,5 +1,5 @@
 import { Hero } from "./Hero"
-import { TokenGenerator } from "./TokenGenerator"
+import { CtaForm } from "./CtaForm"
 import { useSetRecoilState } from "recoil"
 import { ActiveTabAtom} from "@/recoil/Atoms"
 
@@ -21,7 +21,7 @@ export const HomePage = () =>
         <div>
             <div className="flex flex-col gap-32">
                 <Hero scrollToGenerator={scrollToGenerator}/>
-                <TokenGenerator/>
+                <CtaForm/>
             </div>
         </div>
     )

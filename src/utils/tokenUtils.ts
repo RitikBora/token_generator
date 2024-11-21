@@ -18,7 +18,7 @@ export const createToken = async({ tokenName , tokenSymbol , tokenImageUrl , tok
         if(!publicKey || !signTransaction)
         {
             console.log("Wallet not connected");
-            return;
+            return {success: false};
         }
 
 
@@ -108,10 +108,12 @@ export const createToken = async({ tokenName , tokenSymbol , tokenImageUrl , tok
         
         await sendTransaction(transaction , connection );
 
+        return {success : true};
+
         }catch(err)
         {
             console.log(err);
+            return {success : false};
         }
 
-        
     }

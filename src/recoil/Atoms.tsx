@@ -10,5 +10,15 @@ const IsConnectionRequiredAtom = atom({
     default: true
 })
 
+const IsGeneratingTokenAtom = atom({
+    key: "IsGeneratingTokenAtom",
+    default: false
+})
 
-export {ActiveTabAtom , IsConnectionRequiredAtom};
+const TokenGenerationStatusAtom = atom<"idle" | "loading" | "success" | "error">({
+    key: "TokenGenerationStatusAtom",
+    default: "idle"
+})
+
+
+export {ActiveTabAtom , IsConnectionRequiredAtom , IsGeneratingTokenAtom , TokenGenerationStatusAtom};
