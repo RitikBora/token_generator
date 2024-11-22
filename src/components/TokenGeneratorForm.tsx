@@ -64,7 +64,7 @@ export const TokenGenarationForm = () =>
             transition={{ duration: 1, ease: "easeOut" }}
         >
             <Coins className="h-16 w-16 mx-auto mb-4 text-blue-400" />
-            <h2 className="text-2xl font-bold mb-4 text-blue-300">Launch Your Crypto Coin</h2>
+            <h2 className="text-2xl font-bold mb-4 text-blue-300">Launch Your Crypto Token</h2>
    {
                isConnectionRequired ? <div className="space-y-4">
                      <p className="mb-4 text-blue-200">Effortlessly generate and customize your very own crypto coin with our intuitive platform. Simply connect your wallet and take your first step into the world of decentralized finance!</p>

@@ -14,7 +14,10 @@ export const Hero = ({scrollToGenerator}: {scrollToGenerator :   (activeTab : st
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200">
             Create Your Web3 Token
           </h1>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-blue-200">Generate custom tokens or receive SOL airdrops with our easy-to-use platform.</p>
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-blue-200">
+            Effortlessly generate custom tokens or receive SOL airdrops with TokenForge.
+          </p>
+
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Button onClick={() => scrollToGenerator("token")} size="lg" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">
               Generate Token
