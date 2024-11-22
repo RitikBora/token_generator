@@ -32,7 +32,7 @@ export const requestSolAirdrop = async(
     return({isSuccess});
 }
 
-const submitAirdropRequest = async(type : "DEVNET" | "TESTNET" , solAmount : string , solanaAddress: string) =>{
+export const submitAirdropRequest = async(type : "DEVNET" | "TESTNET" , solAmount : string , solanaAddress: string) =>{
         let publicKey = null;
         
         if(isNaN(parseFloat(solAmount)))

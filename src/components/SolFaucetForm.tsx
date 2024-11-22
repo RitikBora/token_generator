@@ -6,6 +6,8 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useSetRecoilState } from "recoil";
 import { AirdropStatusAtom, IsRequestingAirdropAtom } from "@/recoil/Atoms";
+import {submitAirdropRequest } from "@/utils/faucetUtils";
+
 
 export const SolFaucetForm = () =>
 {
@@ -15,14 +17,20 @@ export const SolFaucetForm = () =>
     const setIsRequestingAirdrop = useSetRecoilState(IsRequestingAirdropAtom);
     const setAirdropStatus = useSetRecoilState(AirdropStatusAtom);
 
-    const onFormSubmit = () =>
+    const onFormSubmit = async() =>
     {
       setIsRequestingAirdrop(true);
       setAirdropStatus('loading');
-      setTimeout(() =>
+
+      const {success}  = await submitAirdropRequest("DEVNET" , solAmount , solanaAddress);
+      if(success)
+      {
+        setAirdropStatus("success");
+      }else
       {
         setAirdropStatus("error");
-      } , 3000)
+      }
+     
     }
 
     return(

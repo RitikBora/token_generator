@@ -32,7 +32,7 @@ export const createToken = async({ tokenName , tokenSymbol , tokenImageUrl , tok
             name: tokenName,
             symbol: tokenSymbol,
             uri: `https://crypto.ritikboradev.com/api/v1/metadata/${mintKeypair.publicKey}`,
-            image: "https://t3.ftcdn.net/jpg/05/59/91/30/360_F_559913029_n348JMJ0jNaewC0U78h2Vv3U2Tvpf0Jp.jpg",
+            image: tokenImageUrl,
             additionalMetadata: []
         };
 
